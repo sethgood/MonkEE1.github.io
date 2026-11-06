@@ -1,0 +1,84 @@
+/* ============================================================
+   MONKEE BLUE GALAXY - Xbox One skin for GamepadViewer.com
+   Built on GamepadViewer's own Xbox One artwork (base-white.svg).
+   Smooth scrolling animated galaxy + MonkEE logo.  Size: 750 x 631.
+   Layers: galaxy.webp (scrolled by CSS)  ->  overlay.png (controller)  ->  button glows.
+   Keep every file from the skin folder together.
+   ============================================================ */
+body { background-color: rgba(0,0,0,0); margin: 0 auto; overflow: hidden; }
+
+/* galaxy layer: seamless strip, swirls in place and glides left -> right forever */
+.controller.custom, .controller.xbox {
+  width: 750px; height: 631px; margin: 0 !important; position: absolute !important;
+  top: 0 !important; left: 0 !important; right: auto !important; bottom: auto !important; transform: none !important;
+  background: url(galaxy.webp) repeat-x 0 0; background-size: 902px 631px;
+  -webkit-mask-image: url(mask.png); mask-image: url(mask.png);
+  -webkit-mask-size: 750px 631px; mask-size: 750px 631px;
+  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  animation: monkee-drift 41.76s linear infinite;
+  will-change: background-position;
+}
+@keyframes monkee-drift { from { background-position: 0 0; } to { background-position: 902px 0; } }
+
+/* controller layer: shading, black outlines, logo, Xbox X, stick wells */
+.controller.custom::before, .controller.xbox::before {
+  content: ""; position: absolute; left: 0; top: 0; width: 750px; height: 631px;
+  background: url(overlay.png) no-repeat 0 0; background-size: 750px 631px; pointer-events: none;
+}
+
+/* controller unplugged: still picture, dimmed */
+.controller.custom.disconnected, .controller.xbox.disconnected {
+  animation: none; background: url(body-static.png) no-repeat 0 0; background-size: 750px 631px;
+  -webkit-mask-image: none; mask-image: none; opacity: .45;
+}
+.controller.custom.disconnected::before, .controller.xbox.disconnected::before { display: none; }
+.custom.disconnected div, .xbox.disconnected div { display: none; }
+.custom .quadrant, .xbox .quadrant, .custom .touchpad, .xbox .touchpad { display: none; }
+
+/* group containers cover the whole canvas; every part uses canvas coordinates */
+.custom .sticks, .xbox .sticks, .custom .abxy, .xbox .abxy, .custom .arrows, .xbox .arrows, .custom .dpad, .xbox .dpad, .custom .bumpers, .xbox .bumpers, .custom .triggers, .xbox .triggers { position: absolute; left: 0; top: 0; width: 750px; height: 631px; margin: 0; }
+.custom .stick, .xbox .stick, .custom .button, .xbox .button, .custom .back, .xbox .back, .custom .start, .xbox .start, .custom .face, .xbox .face, .custom .meta, .xbox .meta, .custom .bumper, .xbox .bumper, .custom .trigger, .xbox .trigger, .custom .trigger-button, .xbox .trigger-button { position: absolute; float: none; transform: none; right: auto; bottom: auto; }
+
+/* ---------- sticks ---------- */
+.custom .stick, .xbox .stick { background: url(stick.png) no-repeat 0 0; width: 104px; height: 104px; }
+.custom .stick.pressed, .xbox .stick.pressed { background-position: -107px 0; }
+.custom .stick.left, .xbox .stick.left { left: 133px; top: 228px; }
+.custom .stick.right, .xbox .stick.right { left: 421px; top: 342px; }
+
+/* ---------- A B X Y ---------- */
+.custom .button, .xbox .button { background: none; background-repeat: no-repeat; opacity: 0; }
+.custom .button.pressed, .xbox .button.pressed { opacity: 1; margin-top: 0; }
+.custom .a, .xbox .a { background-image: url(btn-a.png); left: 540px; top: 303px; width: 54px; height: 54px; }
+.custom .b, .xbox .b { background-image: url(btn-b.png); left: 591px; top: 253px; width: 53px; height: 53px; }
+.custom .x, .xbox .x { background-image: url(btn-x.png); left: 489px; top: 253px; width: 54px; height: 53px; }
+.custom .y, .xbox .y { background-image: url(btn-y.png); left: 540px; top: 202px; width: 54px; height: 54px; }
+
+/* ---------- View / Menu ---------- */
+.custom .back, .xbox .back, .custom .start, .xbox .start { background-repeat: no-repeat; background-position: 0 0; opacity: 0; }
+.custom .back.pressed, .xbox .back.pressed, .custom .start.pressed, .xbox .start.pressed { opacity: 1; }
+.custom .back, .xbox .back { background-image: url(view.png); left: 303px; top: 261px; width: 38px; height: 38px; }
+.custom .start, .xbox .start { background-image: url(menu.png); left: 411px; top: 261px; width: 38px; height: 38px; }
+
+/* ---------- d-pad ---------- */
+.custom .face, .xbox .face { background-repeat: no-repeat; background-position: 0 0; opacity: 0; }
+.custom .face.pressed, .xbox .face.pressed { opacity: 1; }
+.custom .face.up, .xbox .face.up { background-image: url(dpad-up.png); left: 264px; top: 349px; width: 28px; height: 39px; }
+.custom .face.down, .xbox .face.down { background-image: url(dpad-down.png); left: 264px; top: 415px; width: 28px; height: 39px; }
+.custom .face.left, .xbox .face.left { background-image: url(dpad-left.png); left: 226px; top: 385px; width: 39px; height: 33px; }
+.custom .face.right, .xbox .face.right { background-image: url(dpad-right.png); left: 291px; top: 385px; width: 39px; height: 33px; }
+
+/* ---------- Xbox guide button ---------- */
+.custom .meta, .xbox .meta { background: url(guide.png) no-repeat 0 0; opacity: 0; left: 342px; top: 163px; width: 66px; height: 67px; }
+.custom .meta.pressed, .xbox .meta.pressed { opacity: 1; }
+
+/* ---------- bumpers LB / RB ---------- */
+.custom .bumper, .xbox .bumper { background-repeat: no-repeat; background-position: 0 0; opacity: 0; }
+.custom .bumper.pressed, .xbox .bumper.pressed { opacity: 1; }
+.custom .bumper.left, .xbox .bumper.left, .custom .bumpers .bumper:first-child, .xbox .bumpers .bumper:first-child { background-image: url(bumper-left.png); left: 107px; top: 128px; width: 173px; height: 65px; }
+.custom .bumper.right, .xbox .bumper.right, .custom .bumpers .bumper:last-child, .xbox .bumpers .bumper:last-child { background-image: url(bumper-right.png); left: 474px; top: 128px; width: 169px; height: 65px; }
+
+/* ---------- triggers LT / RT (glow strength follows the pull) ---------- */
+.custom .trigger, .xbox .trigger, .custom .trigger-button, .xbox .trigger-button { background-repeat: no-repeat; background-position: 0 0; opacity: 0; }
+.custom .trigger-button.pressed, .xbox .trigger-button.pressed { opacity: 1; }
+.custom .trigger.left, .xbox .trigger.left, .custom .triggers .trigger:first-child, .xbox .triggers .trigger:first-child, .custom .trigger-button.left, .xbox .trigger-button.left { background-image: url(trigger-left.png); left: 150px; top: 0px; width: 91px; height: 123px; }
+.custom .trigger.right, .xbox .trigger.right, .custom .triggers .trigger:last-child, .xbox .triggers .trigger:last-child, .custom .trigger-button.right, .xbox .trigger-button.right { background-image: url(trigger-right.png); left: 509px; top: 0px; width: 91px; height: 123px; }
