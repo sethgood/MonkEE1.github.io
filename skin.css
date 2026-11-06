@@ -9,7 +9,8 @@ body { background-color: rgba(0,0,0,0); margin: 0 auto; overflow: hidden; }
 
 /* galaxy layer: seamless strip, swirls in place and glides left -> right forever */
 .controller.custom, .controller.xbox {
-  width: 750px; height: 631px; margin-left: 0; margin-top: 0; position: relative;
+  width: 750px; height: 631px; margin: 0 !important; position: absolute !important;
+  top: 0 !important; left: 0 !important; right: auto !important; bottom: auto !important; transform: none !important;
   background: url(galaxy.webp) repeat-x 0 0; background-size: 902px 631px;
   -webkit-mask-image: url(mask.png); mask-image: url(mask.png);
   -webkit-mask-size: 750px 631px; mask-size: 750px 631px;
